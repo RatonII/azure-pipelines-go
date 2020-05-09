@@ -51,7 +51,7 @@ func CreatePipeline(project string, name string,
 			proc.Wait()
 		}
 	}else {
-		if proc, err := Start( "cmd","/c", "az", "pipelines", "create",
+		if proc, err := Start("az", "pipelines", "create",
 			"--project", project,
 			"--name", name,
 			"--description", description,
