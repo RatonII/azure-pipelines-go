@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"runtime"
 
@@ -16,7 +15,6 @@ func main() {
 		flag.Parse()
 		if *pipelinesFile != "" {
 			var p PipelinesConfig
-			fmt.Println(p.getConf(pipelinesFile).Organization)
 			pipelines := p.getConf(pipelinesFile).Pipelines
 			org := p.getConf(pipelinesFile).Organization
 			DevOpsLogin(org)
