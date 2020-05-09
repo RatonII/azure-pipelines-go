@@ -4,12 +4,14 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"runtime"
 
 	"sync"
 )
 
 func main() {
 		var wg sync.WaitGroup
+		runtime.GOMAXPROCS(4)
 		pipelinesFile := flag.String("file","","Add a config file yaml with all the pipelines contains")
 		flag.Parse()
 		if *pipelinesFile != "" {

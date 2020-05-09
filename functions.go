@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"runtime"
 	"sync"
 )
 
@@ -37,16 +38,30 @@ func CreatePipeline(project string, name string,
 					repository string, branch string,
 					yamlpath string,  wg *sync.WaitGroup) {
 	defer wg.Done()
-	if proc, err := Start( "az", "pipelines", "create",
-		"--project", project,
-		"--name", name,
-		"--description", description,
-		"--folder", folder,
-		"--repository",  repository,
-		"--branch", branch,
-		"--repository-type", "tfsgit",
-		"--yml-path", yamlpath); err == nil {
-		proc.Wait()
+	if runtime.GOOS == "windows" {
+		if proc, err := Start("cmd", "/c", "az", "pipelines", "create",
+			"--project", project,
+			"--name", name,
+			"--description", description,
+			"--folder", folder,
+			"--repository", repository,
+			"--branch", branch,
+			"--repository-type", "tfsgit",
+			"--yml-path", yamlpath); err == nil {
+			proc.Wait()
+		}
+	}else {
+		if proc, err := Start( "cmd","/c", "az", "pipelines", "create",
+			"--project", project,
+			"--name", name,
+			"--description", description,
+			"--folder", folder,
+			"--repository",  repository,
+			"--branch", branch,
+			"--repository-type", "tfsgit",
+			"--yml-path", yamlpath); err == nil {
+			proc.Wait()
+		}
 	}
 }
 func  DevOpsLogin(org string) {
