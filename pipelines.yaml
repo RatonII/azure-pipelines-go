@@ -1,0 +1,8 @@
+- name: YamlPipelineTest
+  organization: https://dev.azure.com/mariuss2007
+  project: test
+  folder: yamlfoldertest
+  repository: test
+  branch: master
+  yamlpath: azure-pipelines.yml
+  description: " This is a test pipelines for the go script to do stuff"
