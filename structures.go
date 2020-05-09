@@ -1,9 +1,12 @@
 package main
 
+type PipelinesConfig struct {
+	Organization string `yaml:"organization"`
+	Pipelines Pipelines
+}
 type Pipelines []Pipeline
 
 type Pipeline struct {
-	Organization string `yaml:"organization"`
 	Project string		`yaml:"project"`
 	Name string			`yaml:"name"`
 	Description string  `yaml:"description"`

@@ -1,8 +1,24 @@
-- name: YamlPipelineTest
-  organization: https://dev.azure.com/mariuss2007
-  project: test
-  folder: yamlfoldertest
-  repository: test
-  branch: master
-  yamlpath: azure-pipelines.yml
-  description: " This is a test pipelines for the go script to do stuff"
+organization: https://dev.azure.com/mariuss2007
+pipelines:
+  - name: YamlPipelineTest4
+    project: test
+    folder: yamlfoldertest
+    repository: test
+    branch: master
+    yamlpath: azure-pipelines.yml
+    description: " This is a test pipelines for the go script to do stuff"
+  - name: YamlPipelineTest5
+    organization: https://dev.azure.com/mariuss2007
+    project: test
+    folder: yamlfoldertest2
+    repository: test
+    branch: master
+    yamlpath: azure-pipelines.yml
+    description: " This is a test pipelines for the go script to do stuff"
+  - name: YamlPipelineTest6
+    project: test
+    folder: yamlfoldertest3
+    repository: test
+    branch: master
+    yamlpath: azure-pipelines.yml
+    description: " This is a test pipelines for the go script to do stuff"

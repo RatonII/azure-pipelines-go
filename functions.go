@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"sync"
 )
 
 func Start(args ...string) (p *os.Process, err error) {
@@ -34,12 +35,13 @@ func CreateFolderPipeline(folderName string, project string) string {
 func CreatePipeline(project string, name string,
 					description string, folder string,
 					repository string, branch string,
-					yamlpath string) {
+					yamlpath string,  wg *sync.WaitGroup) {
+	defer wg.Done()
 	if proc, err := Start( "az", "pipelines", "create",
 		"--project", project,
 		"--name", name,
 		"--description", description,
-		"--folder", CreateFolderPipeline(folder, project),
+		"--folder", folder,
 		"--repository",  repository,
 		"--branch", branch,
 		"--repository-type", "tfsgit",
@@ -56,7 +58,7 @@ func  DevOpsLogin(org string) {
 	}
 }
 
-func (c *Pipelines) getConf(PipelinesFile *string) *Pipelines {
+func (c *PipelinesConfig) getConf(PipelinesFile *string) *PipelinesConfig {
 
 	yamlFile, err := ioutil.ReadFile(*PipelinesFile)
 	if err != nil {
